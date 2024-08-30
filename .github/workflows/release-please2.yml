@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  RELEASE_PLEASE_BRANCH: release-please--branches--main--components--acl-server
+  RELEASE_PLEASE_BRANCH: release-please--branches--main--components--yargs
 
 jobs:
   pre-test-for-release:
