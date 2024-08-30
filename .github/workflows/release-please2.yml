@@ -1,0 +1,63 @@
+name: 🚀 Release please
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  RELEASE_PLEASE_BRANCH: release-please--branches--main--components--acl-server
+
+jobs:
+  pre-test-for-release:
+    runs-on: ubuntu-latest
+    outputs:
+      trigger_type: ${{ steps.check-trigger-type.outputs.trigger_type }}
+      pr_status: ${{ steps.check-pr.outputs.pr_status }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Determine trigger type
+        id: check-trigger-type
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "trigger_type=manual" >> $GITHUB_OUTPUT
+          else
+            echo "trigger_type=auto" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check for open PR
+        id: check-pr
+        if: steps.check-trigger-type.outputs.trigger_type == 'auto'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          branch_name=${{ env.RELEASE_PLEASE_BRANCH}}
+          repo="repos/${{ github.repository }}/pulls"
+          prs=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /$repo)
+          if echo "$prs" | jq -e --arg branch_name "$branch_name" '.[] | select(.head.ref == $branch_name)' > /dev/null; then
+            echo "Branch exists in pull requests."
+            echo "pr_status=true" >> $GITHUB_OUTPUT
+          else
+            echo "Branch does not exist in pull requests."
+            echo "pr_status=false" >> $GITHUB_OUTPUT
+          fi
+
+  release-please:
+    runs-on: ubuntu-latest
+    needs: pre-test-for-release
+    if: ${{ needs.pre-test-for-release.outputs.trigger_type == 'manual' || needs.pre-test-for-release.outputs.pr_status == 'true' }}
+    steps:
+
+      - uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: node
+          prerelease: false
+
+
