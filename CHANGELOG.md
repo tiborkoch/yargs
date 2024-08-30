@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.0.0 (2024-08-30)
+
+
+### Bug Fixes
+
+* test1 ([2af89f8](https://github.com/tiborkoch/yargs/commit/2af89f8d60990df5a77760b4a3771b50200e679c))
+* test1 ([476adcd](https://github.com/tiborkoch/yargs/commit/476adcd42bf32578ef1946b46466d2249ed824d7))
+* test2 ([775fbdf](https://github.com/tiborkoch/yargs/commit/775fbdf1adfeaf5e09e9b2754fcef58d9668c28e))
+
 ## [17.7.2](https://github.com/yargs/yargs/compare/v17.7.1...v17.7.2) (2023-04-27)
 
 
