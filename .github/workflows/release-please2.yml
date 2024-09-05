@@ -64,6 +64,7 @@ jobs:
         name: Install pnpm
         with:
           run_install: false
+        working-directory: ./release-action
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -73,6 +74,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
         shell: bash
+        working-directory: ./release-action
 
       - uses: ./release-action
         with:
