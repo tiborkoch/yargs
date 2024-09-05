@@ -58,7 +58,7 @@ jobs:
     if: ${{ needs.pre-test-for-release.outputs.trigger_type == 'manual' || needs.pre-test-for-release.outputs.pr_status == 'true' }}
     steps:
 
-      - uses: googleapis/release-please-action@v4
+      - uses: ./release-action
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
