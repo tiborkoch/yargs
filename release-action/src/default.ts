@@ -71,7 +71,7 @@ export class DefaultVersioningStrategy implements VersioningStrategy {
     let breaking = 0;
     let features = 0;
     for (const commit of commits) {
-      console.log('COMMIT_TYPE', commit.type)
+      console.log('COMMIT_TYPE', commit.type);
       const releaseAs = commit.notes.find(
         (note) => note.title === 'RELEASE AS',
       );
@@ -86,29 +86,26 @@ export class DefaultVersioningStrategy implements VersioningStrategy {
       }
       if (commit.breaking) {
         breaking++;
-      } else if (
-        commit.type === 'feat' ||
-        commit.type === 'feature'
-        // commit.type === 'chore' ||
-        // commit.type === 'refactor'
-      ) {
+      } else if (commit.type === 'feat' || commit.type === 'feature') {
         features++;
       }
     }
 
-    if (breaking > 0) {
-      if (version.isPreMajor && this.bumpMinorPreMajor) {
-        return new MinorVersionUpdate();
-      }
-      return new MajorVersionUpdate();
-    }
+    console.log('AAAAAAAA', breaking);
 
-    if (features > 0) {
-      if (version.isPreMajor && this.bumpPatchForMinorPreMajor) {
-        return new PatchVersionUpdate();
-      }
-      return new MinorVersionUpdate();
-    }
+    // if (breaking > 0) {
+    //   if (version.isPreMajor && this.bumpMinorPreMajor) {
+    //     return new MinorVersionUpdate();
+    //   }
+    //   return new MajorVersionUpdate();
+    // }
+    //
+    // if (features > 0) {
+    //   if (version.isPreMajor && this.bumpPatchForMinorPreMajor) {
+    //     return new PatchVersionUpdate();
+    //   }
+    //   return new MinorVersionUpdate();
+    // }
 
     return new PatchVersionUpdate();
   }
