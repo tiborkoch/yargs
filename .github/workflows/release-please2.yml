@@ -76,6 +76,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
+        working-directory: ./release-action
         shell: bash
 
       - uses: ./release-action
