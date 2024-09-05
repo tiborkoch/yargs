@@ -71,6 +71,7 @@ export class DefaultVersioningStrategy implements VersioningStrategy {
     let breaking = 0;
     let features = 0;
     for (const commit of commits) {
+      console.log('COMMIT_TYPE', commit.type)
       const releaseAs = commit.notes.find(
         (note) => note.title === 'RELEASE AS',
       );
@@ -87,9 +88,9 @@ export class DefaultVersioningStrategy implements VersioningStrategy {
         breaking++;
       } else if (
         commit.type === 'feat' ||
-        commit.type === 'feature' ||
-        commit.type === 'chore' ||
-        commit.type === 'refactor'
+        commit.type === 'feature'
+        // commit.type === 'chore' ||
+        // commit.type === 'refactor'
       ) {
         features++;
       }
