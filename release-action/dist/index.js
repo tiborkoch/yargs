@@ -63,12 +63,12 @@ function loadOrBuildManifest(github, inputs) {
             changelogSections: [
                 { type: 'feat', section: 'Features' },
                 { type: 'fix', section: 'Bug Fixes' },
-                { type: 'chore', section: 'Chores', hidden: true },
-                { type: 'docs', section: 'Documentation', hidden: true },
-                { type: 'style', section: 'Styling', hidden: true },
-                { type: 'refactor', section: 'Code Refactoring', hidden: true },
-                { type: 'perf', section: 'Performance Improvements', hidden: true },
-                { type: 'test', section: 'Tests', hidden: true },
+                { type: 'chore', section: 'Chores', hidden: false },
+                { type: 'docs', section: 'Documentation', hidden: false },
+                { type: 'style', section: 'Styling', hidden: false },
+                { type: 'refactor', section: 'Code Refactoring', hidden: false },
+                { type: 'perf', section: 'Performance Improvements', hidden: false },
+                { type: 'test', section: 'Tests', hidden: false },
             ],
         }, {
             fork: inputs.fork,
