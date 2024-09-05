@@ -14,6 +14,7 @@
 
 import * as core from '@actions/core';
 import { type CreatedRelease, GitHub, Manifest, type PullRequest, VERSION, } from 'release-please';
+import { fileURLToPath } from "node:url";
 
 const DEFAULT_CONFIG_FILE = 'release-please-config.json';
 const DEFAULT_MANIFEST_FILE = '.release-please-manifest.json';
@@ -205,7 +206,7 @@ function outputPRs(prs: (PullRequest | undefined)[]) {
   }
 }
 
-if (require.main === module) {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch((err) => {
     core.setFailed(`release-please failed: ${err.message}`);
   });
