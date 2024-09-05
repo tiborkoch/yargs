@@ -13,8 +13,16 @@
 // limitations under the License.
 
 import * as core from '@actions/core';
-import { type CreatedRelease, GitHub, Manifest, type PullRequest, VERSION, } from 'release-please';
+import {
+  type CreatedRelease,
+  GitHub,
+  Manifest,
+  type PullRequest,
+  registerVersioningStrategy,
+  VERSION,
+} from 'release-please';
 import { fileURLToPath } from "node:url";
+import { DefaultVersioningStrategy } from "./default.js";
 
 const DEFAULT_CONFIG_FILE = 'release-please-config.json';
 const DEFAULT_MANIFEST_FILE = '.release-please-manifest.json';
@@ -86,6 +94,10 @@ function loadOrBuildManifest(
 ): Promise<Manifest> {
   if (inputs.releaseType) {
     core.debug('Building manifest from config');
+    registerVersioningStrategy(
+      "customTest",
+      options => new DefaultVersioningStrategy(options)
+    );
     return Manifest.fromConfig(
       github,
       github.repository.defaultBranch,
@@ -93,6 +105,7 @@ function loadOrBuildManifest(
         releaseType: inputs.releaseType,
         includeComponentInTag: inputs.includeComponentInTag,
         changelogHost: inputs.changelogHost,
+        versioning: 'customTest'
       },
       {
         fork: inputs.fork,
