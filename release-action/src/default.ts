@@ -91,21 +91,21 @@ export class DefaultVersioningStrategy implements VersioningStrategy {
       }
     }
 
-    console.log('AAAAAAAA', breaking);
+    console.log('BBBBB', breaking);
 
-    // if (breaking > 0) {
-    //   if (version.isPreMajor && this.bumpMinorPreMajor) {
-    //     return new MinorVersionUpdate();
-    //   }
-    //   return new MajorVersionUpdate();
-    // }
-    //
-    // if (features > 0) {
-    //   if (version.isPreMajor && this.bumpPatchForMinorPreMajor) {
-    //     return new PatchVersionUpdate();
-    //   }
-    //   return new MinorVersionUpdate();
-    // }
+    if (breaking > 0) {
+      if (version.isPreMajor && this.bumpMinorPreMajor) {
+        return new MinorVersionUpdate();
+      }
+      return new MajorVersionUpdate();
+    }
+
+    if (features > 0) {
+      if (version.isPreMajor && this.bumpPatchForMinorPreMajor) {
+        return new PatchVersionUpdate();
+      }
+      return new MinorVersionUpdate();
+    }
 
     return new PatchVersionUpdate();
   }
