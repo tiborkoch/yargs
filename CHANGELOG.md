@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/tiborkoch/yargs/compare/v1.0.0...v1.1.0) (2024-09-05)
+
+
+### Features
+
+* test4 ([17b11d3](https://github.com/tiborkoch/yargs/commit/17b11d37fda4401b079f5874017788429840d9c7))
+
+
+### Bug Fixes
+
+* test3 ([5019fc6](https://github.com/tiborkoch/yargs/commit/5019fc6aa9676460ad12ee30a61f5ac0f21a4203))
+* test4 ([6c21b68](https://github.com/tiborkoch/yargs/commit/6c21b684d5dd6ab54a72c8f9cbe567ac45f6db0a))
+* test4 ([e81a174](https://github.com/tiborkoch/yargs/commit/e81a174dae7f28178674f0595fe8e7618ccfebe9))
+* test4 ([3497321](https://github.com/tiborkoch/yargs/commit/349732106c12e64bd50c09869611399d9a7d8930))
+* test4 ([4200d06](https://github.com/tiborkoch/yargs/commit/4200d063f6e26e0069831d8fe657e61f2261fc7d))
+* test4 ([c47f066](https://github.com/tiborkoch/yargs/commit/c47f0666c58732879cfc995dbdc986842b503118))
+* test4 ([6aceb15](https://github.com/tiborkoch/yargs/commit/6aceb15b17be533897ca3fa925a5886e4bc82cfc))
+* test4 ([e314f88](https://github.com/tiborkoch/yargs/commit/e314f88fba8ffcda8641cb473c993d560fda1f10))
+* test4 ([1fd8a7a](https://github.com/tiborkoch/yargs/commit/1fd8a7a064f48e5488d248b9a5b748afbc5abbeb))
+* test4 ([300d19d](https://github.com/tiborkoch/yargs/commit/300d19de725ad1778eb42f5fb0cd1281d7e759c8))
+* test4 ([1303e12](https://github.com/tiborkoch/yargs/commit/1303e1209c8f6d8023128d2539c92ecfe4371d97))
+* test4 ([9cce376](https://github.com/tiborkoch/yargs/commit/9cce3762dbf58c4b289d1f857a4c7609d949c48c))
+* test4 ([3194b91](https://github.com/tiborkoch/yargs/commit/3194b913b0ab84c5ead031df71e9652d5db38ff4))
+* test5 ([088dad4](https://github.com/tiborkoch/yargs/commit/088dad43c1e7c6f74752e5fef4d6ca1cdf3372d9))
+
 ## 1.0.0 (2024-08-30)
 
 
