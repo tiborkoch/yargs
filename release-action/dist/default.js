@@ -51,6 +51,7 @@ export class DefaultVersioningStrategy {
         let breaking = 0;
         let features = 0;
         for (const commit of commits) {
+            console.log('COMMIT_TYPE', commit.type);
             const releaseAs = commit.notes.find((note) => note.title === 'RELEASE AS');
             if (releaseAs) {
                 // commits are handled newest to oldest, so take the first one (newest) found
@@ -61,9 +62,10 @@ export class DefaultVersioningStrategy {
                 breaking++;
             }
             else if (commit.type === 'feat' ||
-                commit.type === 'feature' ||
-                commit.type === 'chore' ||
-                commit.type === 'refactor') {
+                commit.type === 'feature'
+            // commit.type === 'chore' ||
+            // commit.type === 'refactor'
+            ) {
                 features++;
             }
         }
