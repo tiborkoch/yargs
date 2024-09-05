@@ -8,7 +8,7 @@
   "type": "module",
   "packageManager": "pnpm@9.9.0",
   "scripts": {
-    "build": "rimraf dist && tsc && esbuild src/**/*.ts --bundle --platform=node --target=node20 --outdir=dist --outbase=src --tsconfig=./tsconfig.json"
+    "build": "rimraf dist && tsc"
   },
   "dependencies": {
     "@actions/core": "^1.10.0",
