@@ -9,4 +9,3 @@ package-lock.json
 example.*
 .DS_Store
 .npmrc
-dist/
