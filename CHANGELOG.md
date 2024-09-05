@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/tiborkoch/yargs/compare/v1.2.0...v1.3.0) (2024-09-05)
+
+
+### Features
+
+* test3 ([762396a](https://github.com/tiborkoch/yargs/commit/762396a49f39a686b0c744dfbb416d7c3d0a3827))
+
 ## [1.2.0](https://github.com/tiborkoch/yargs/compare/v1.1.0...v1.2.0) (2024-09-05)
 
 
