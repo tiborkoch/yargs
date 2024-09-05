@@ -52,14 +52,24 @@ function getOptionalBooleanInput(name) {
     return core.getBooleanInput(name);
 }
 function loadOrBuildManifest(github, inputs) {
-    registerVersioningStrategy("customTest", options => new DefaultVersioningStrategy(options));
+    registerVersioningStrategy('customTest', (options) => new DefaultVersioningStrategy(options));
     if (inputs.releaseType) {
         core.debug('Building manifest from config');
         return Manifest.fromConfig(github, github.repository.defaultBranch, {
             releaseType: inputs.releaseType,
             includeComponentInTag: inputs.includeComponentInTag,
             changelogHost: inputs.changelogHost,
-            versioning: 'customTest'
+            versioning: 'customTest',
+            // changelogSections: [
+            //   { type: 'feat', section: 'Features' },
+            //   { type: 'fix', section: 'Bug Fixes' },
+            //   { type: 'chore', section: 'Chores', hidden: true },
+            //   { type: 'docs', section: 'Documentation', hidden: true },
+            //   { type: 'style', section: 'Styling', hidden: true },
+            //   { type: 'refactor', section: 'Code Refactoring', hidden: true },
+            //   { type: 'perf', section: 'Performance Improvements', hidden: true },
+            //   { type: 'test', section: 'Tests', hidden: true },
+            // ],
         }, {
             fork: inputs.fork,
         }, inputs.path);
