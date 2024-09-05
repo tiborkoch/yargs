@@ -92,12 +92,12 @@ function loadOrBuildManifest(
   github: GitHub,
   inputs: ActionInputs,
 ): Promise<Manifest> {
+  registerVersioningStrategy(
+    "customTest",
+    options => new DefaultVersioningStrategy(options)
+  );
   if (inputs.releaseType) {
     core.debug('Building manifest from config');
-    registerVersioningStrategy(
-      "customTest",
-      options => new DefaultVersioningStrategy(options)
-    );
     return Manifest.fromConfig(
       github,
       github.repository.defaultBranch,

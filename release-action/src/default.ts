@@ -90,6 +90,8 @@ export class DefaultVersioningStrategy implements VersioningStrategy {
       }
     }
 
+    console.log('AAAAAAAA', breaking);
+
     // if (breaking > 0) {
     //   if (version.isPreMajor && this.bumpMinorPreMajor) {
     //     return new MinorVersionUpdate();
