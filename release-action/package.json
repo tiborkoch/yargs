@@ -1,0 +1,27 @@
+{
+  "name": "@wizzair/release-action",
+  "description": "automated releases based on conventional commits",
+  "version": "0.0.1",
+  "author": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "type": "module",
+  "packageManager": "pnpm@9.9.0",
+  "scripts": {
+    "build": "rimraf dist && tsc && esbuild src/**/*.ts --bundle --platform=node --target=node20 --outdir=dist --outbase=src --tsconfig=./tsconfig.json"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "release-please": "^16.12.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "22.5.2",
+    "@typescript-eslint/eslint-plugin": "^8.2.0",
+    "@typescript-eslint/parser": "^8.2.0",
+    "esbuild": "^0.23.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.4"
+  }
+}
