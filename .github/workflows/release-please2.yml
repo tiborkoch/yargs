@@ -60,11 +60,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Change working directory
+        run: cd ./release-action
+
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           run_install: false
-        working-directory: ./release-action
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -74,7 +76,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
         shell: bash
-        working-directory: ./release-action
 
       - uses: ./release-action
         with:
