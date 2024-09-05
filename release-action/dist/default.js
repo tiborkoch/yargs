@@ -1,4 +1,3 @@
-"use strict";
 // Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +11,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DefaultVersioningStrategy = void 0;
-const versioning_strategy_js_1 = require("release-please/build/src/versioning-strategy.js");
-const logger_js_1 = require("release-please/build/src/util/logger.js");
-const version_js_1 = require("release-please/build/src/version.js");
+import { CustomVersionUpdate, MajorVersionUpdate, MinorVersionUpdate, PatchVersionUpdate, } from 'release-please/build/src/versioning-strategy.js';
+import { logger as defaultLogger } from 'release-please/build/src/util/logger.js';
+import { Version } from 'release-please/build/src/version.js';
 /**
  * This is the default VersioningStrategy for release-please. Breaking
  * changes should bump the major, features should bump the minor, and other
  * significant changes should bump the patch version.
  */
-class DefaultVersioningStrategy {
+export class DefaultVersioningStrategy {
+    bumpMinorPreMajor;
+    bumpPatchForMinorPreMajor;
+    logger;
     /**
      * Create a new DefaultVersioningStrategy
      * @param {DefaultVersioningStrategyOptions} options Configuration options
@@ -32,10 +32,9 @@ class DefaultVersioningStrategy {
      *   1.0.0, then bump the patch version for features
      */
     constructor(options = {}) {
-        var _a;
         this.bumpMinorPreMajor = options.bumpMinorPreMajor === true;
         this.bumpPatchForMinorPreMajor = options.bumpPatchForMinorPreMajor === true;
-        this.logger = (_a = options.logger) !== null && _a !== void 0 ? _a : logger_js_1.logger;
+        this.logger = options.logger ?? defaultLogger;
     }
     /**
      * Given the current version of an artifact and a list of commits,
@@ -56,7 +55,7 @@ class DefaultVersioningStrategy {
             if (releaseAs) {
                 // commits are handled newest to oldest, so take the first one (newest) found
                 this.logger.debug(`found Release-As: ${releaseAs.text}, forcing version`);
-                return new versioning_strategy_js_1.CustomVersionUpdate(version_js_1.Version.parse(releaseAs.text).toString());
+                return new CustomVersionUpdate(Version.parse(releaseAs.text).toString());
             }
             if (commit.breaking) {
                 breaking++;
@@ -67,17 +66,17 @@ class DefaultVersioningStrategy {
         }
         if (breaking > 0) {
             if (version.isPreMajor && this.bumpMinorPreMajor) {
-                return new versioning_strategy_js_1.MinorVersionUpdate();
+                return new MinorVersionUpdate();
             }
-            return new versioning_strategy_js_1.MajorVersionUpdate();
+            return new MajorVersionUpdate();
         }
         if (features > 0) {
             if (version.isPreMajor && this.bumpPatchForMinorPreMajor) {
-                return new versioning_strategy_js_1.PatchVersionUpdate();
+                return new PatchVersionUpdate();
             }
-            return new versioning_strategy_js_1.MinorVersionUpdate();
+            return new MinorVersionUpdate();
         }
-        return new versioning_strategy_js_1.PatchVersionUpdate();
+        return new PatchVersionUpdate();
     }
     /**
      * Given the current version of an artifact and a list of commits,
@@ -91,4 +90,3 @@ class DefaultVersioningStrategy {
         return this.determineReleaseType(version, commits).bump(version);
     }
 }
-exports.DefaultVersioningStrategy = DefaultVersioningStrategy;

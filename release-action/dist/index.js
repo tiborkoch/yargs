@@ -1,4 +1,3 @@
-"use strict";
 // Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,33 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.main = main;
-const core = __importStar(require("@actions/core"));
-const release_please_1 = require("release-please");
+import * as core from '@actions/core';
+import { GitHub, Manifest, VERSION, } from 'release-please';
 const DEFAULT_CONFIG_FILE = 'release-please-config.json';
 const DEFAULT_MANIFEST_FILE = '.release-please-manifest.json';
 const DEFAULT_GITHUB_API_URL = 'https://api.github.com';
@@ -78,7 +52,7 @@ function getOptionalBooleanInput(name) {
 function loadOrBuildManifest(github, inputs) {
     if (inputs.releaseType) {
         core.debug('Building manifest from config');
-        return release_please_1.Manifest.fromConfig(github, github.repository.defaultBranch, {
+        return Manifest.fromConfig(github, github.repository.defaultBranch, {
             releaseType: inputs.releaseType,
             includeComponentInTag: inputs.includeComponentInTag,
             changelogHost: inputs.changelogHost,
@@ -92,10 +66,10 @@ function loadOrBuildManifest(github, inputs) {
         }
         : {};
     core.debug('Loading manifest from config file');
-    return release_please_1.Manifest.fromManifest(github, github.repository.defaultBranch, inputs.configFile, inputs.manifestFile, manifestOverrides);
+    return Manifest.fromManifest(github, github.repository.defaultBranch, inputs.configFile, inputs.manifestFile, manifestOverrides);
 }
-async function main() {
-    core.info(`Running release-please version: ${release_please_1.VERSION}`);
+export async function main() {
+    core.info(`Running release-please version: ${VERSION}`);
     const inputs = parseInputs();
     const github = await getGitHubInstance(inputs);
     if (!inputs.skipGitHubRelease) {
@@ -128,7 +102,7 @@ function getGitHubInstance(inputs) {
         token: inputs.token,
         defaultBranch: inputs.targetBranch,
     };
-    return release_please_1.GitHub.create(githubCreateOpts);
+    return GitHub.create(githubCreateOpts);
 }
 function setPathOutput(path, key, value) {
     if (path === '.') {
