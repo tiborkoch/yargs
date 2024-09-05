@@ -85,26 +85,29 @@ export class DefaultVersioningStrategy implements VersioningStrategy {
       }
       if (commit.breaking) {
         breaking++;
-      } else if (commit.type === 'feat' || commit.type === 'feature') {
+      } else if (
+        commit.type === 'feat' ||
+        commit.type === 'feature' ||
+        commit.type === 'chore' ||
+        commit.type === 'refactor'
+      ) {
         features++;
       }
     }
 
-    console.log('AAAAAAAA', breaking);
+    if (breaking > 0) {
+      if (version.isPreMajor && this.bumpMinorPreMajor) {
+        return new MinorVersionUpdate();
+      }
+      return new MajorVersionUpdate();
+    }
 
-    // if (breaking > 0) {
-    //   if (version.isPreMajor && this.bumpMinorPreMajor) {
-    //     return new MinorVersionUpdate();
-    //   }
-    //   return new MajorVersionUpdate();
-    // }
-    //
-    // if (features > 0) {
-    //   if (version.isPreMajor && this.bumpPatchForMinorPreMajor) {
-    //     return new PatchVersionUpdate();
-    //   }
-    //   return new MinorVersionUpdate();
-    // }
+    if (features > 0) {
+      if (version.isPreMajor && this.bumpPatchForMinorPreMajor) {
+        return new PatchVersionUpdate();
+      }
+      return new MinorVersionUpdate();
+    }
 
     return new PatchVersionUpdate();
   }
