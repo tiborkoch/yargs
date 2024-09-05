@@ -59,7 +59,7 @@ function loadOrBuildManifest(github, inputs) {
             releaseType: inputs.releaseType,
             includeComponentInTag: inputs.includeComponentInTag,
             changelogHost: inputs.changelogHost,
-            versioning: 'always-bump-patch'
+            versioning: 'customTest'
         }, {
             fork: inputs.fork,
         }, inputs.path);
