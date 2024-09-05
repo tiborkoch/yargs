@@ -67,6 +67,7 @@ jobs:
         name: Install pnpm
         with:
           run_install: false
+          package_json_file: './release-action/package.json'
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
