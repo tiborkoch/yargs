@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import { CustomVersionUpdate, MajorVersionUpdate, MinorVersionUpdate, PatchVersionUpdate, } from 'release-please/build/src/versioning-strategy.js';
+import { CustomVersionUpdate, PatchVersionUpdate, } from 'release-please/build/src/versioning-strategy.js';
 import { logger as defaultLogger } from 'release-please/build/src/util/logger.js';
 import { Version } from 'release-please/build/src/version.js';
 /**
@@ -64,18 +64,20 @@ export class DefaultVersioningStrategy {
                 features++;
             }
         }
-        if (breaking > 0) {
-            if (version.isPreMajor && this.bumpMinorPreMajor) {
-                return new MinorVersionUpdate();
-            }
-            return new MajorVersionUpdate();
-        }
-        if (features > 0) {
-            if (version.isPreMajor && this.bumpPatchForMinorPreMajor) {
-                return new PatchVersionUpdate();
-            }
-            return new MinorVersionUpdate();
-        }
+        console.log('AAAAAAAA', breaking);
+        // if (breaking > 0) {
+        //   if (version.isPreMajor && this.bumpMinorPreMajor) {
+        //     return new MinorVersionUpdate();
+        //   }
+        //   return new MajorVersionUpdate();
+        // }
+        //
+        // if (features > 0) {
+        //   if (version.isPreMajor && this.bumpPatchForMinorPreMajor) {
+        //     return new PatchVersionUpdate();
+        //   }
+        //   return new MinorVersionUpdate();
+        // }
         return new PatchVersionUpdate();
     }
     /**

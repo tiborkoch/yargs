@@ -105,7 +105,7 @@ function loadOrBuildManifest(
         releaseType: inputs.releaseType,
         includeComponentInTag: inputs.includeComponentInTag,
         changelogHost: inputs.changelogHost,
-        versioning: 'always-bump-patch222'
+        versioning: 'always-bump-patch'
       },
       {
         fork: inputs.fork,
