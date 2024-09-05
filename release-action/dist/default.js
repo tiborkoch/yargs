@@ -61,7 +61,10 @@ export class DefaultVersioningStrategy {
             if (commit.breaking) {
                 breaking++;
             }
-            else if (commit.type === 'feat' || commit.type === 'feature') {
+            else if (commit.type === 'feat' ||
+                commit.type === 'feature' ||
+                commit.type === 'chore' ||
+                commit.type === 'refactor') {
                 features++;
             }
         }
