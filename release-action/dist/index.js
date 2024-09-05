@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 import * as core from '@actions/core';
-import { GitHub, Manifest, VERSION, } from 'release-please';
+import { GitHub, Manifest, registerVersioningStrategy, VERSION, } from 'release-please';
 import { fileURLToPath } from "node:url";
+import { DefaultVersioningStrategy } from "./default.js";
 const DEFAULT_CONFIG_FILE = 'release-please-config.json';
 const DEFAULT_MANIFEST_FILE = '.release-please-manifest.json';
 const DEFAULT_GITHUB_API_URL = 'https://api.github.com';
@@ -51,12 +52,14 @@ function getOptionalBooleanInput(name) {
     return core.getBooleanInput(name);
 }
 function loadOrBuildManifest(github, inputs) {
+    registerVersioningStrategy("customTest", options => new DefaultVersioningStrategy(options));
     if (inputs.releaseType) {
         core.debug('Building manifest from config');
         return Manifest.fromConfig(github, github.repository.defaultBranch, {
             releaseType: inputs.releaseType,
             includeComponentInTag: inputs.includeComponentInTag,
             changelogHost: inputs.changelogHost,
+            versioning: 'always-bump-patch'
         }, {
             fork: inputs.fork,
         }, inputs.path);
