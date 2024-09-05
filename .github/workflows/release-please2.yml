@@ -57,6 +57,10 @@ jobs:
     needs: pre-test-for-release
     if: ${{ needs.pre-test-for-release.outputs.trigger_type == 'manual' || needs.pre-test-for-release.outputs.pr_status == 'true' }}
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
       - name: Checkout code
         uses: actions/checkout@v2
       - uses: ./release-action
