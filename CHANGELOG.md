@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.4](https://github.com/tiborkoch/yargs/compare/v1.6.3...v1.6.4) (2024-09-06)
+
+
+### Bug Fixes
+
+* aaa1 ([d2df9c0](https://github.com/tiborkoch/yargs/commit/d2df9c0a7e8d8ffcc06cf63e7c1ecf1b3cfb7471))
+
 ## [1.6.3](https://github.com/tiborkoch/yargs/compare/v1.6.2...v1.6.3) (2024-09-06)
 
 
