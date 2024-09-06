@@ -83,7 +83,7 @@ jobs:
 #      - uses: ./release-action
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: node
+#          release-type: node
           prerelease: false
 
 
