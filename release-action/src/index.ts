@@ -96,7 +96,6 @@ function loadOrBuildManifest(
     'customTest',
     (options) => new DefaultVersioningStrategy(options),
   );
-
   if (inputs.releaseType) {
     core.debug('Building manifest from config');
     return Manifest.fromConfig(
