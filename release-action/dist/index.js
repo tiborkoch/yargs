@@ -59,7 +59,7 @@ function loadOrBuildManifest(github, inputs) {
             releaseType: inputs.releaseType,
             includeComponentInTag: inputs.includeComponentInTag,
             changelogHost: inputs.changelogHost,
-            versioning: 'customTest',
+            versioning: 'default',
             changelogSections: [
                 { type: 'feat', section: 'Features' },
                 { type: 'fix', section: 'Bug Fixes' },

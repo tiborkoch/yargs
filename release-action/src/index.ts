@@ -96,6 +96,7 @@ function loadOrBuildManifest(
     'customTest',
     (options) => new DefaultVersioningStrategy(options),
   );
+
   if (inputs.releaseType) {
     core.debug('Building manifest from config');
     return Manifest.fromConfig(
@@ -105,7 +106,7 @@ function loadOrBuildManifest(
         releaseType: inputs.releaseType,
         includeComponentInTag: inputs.includeComponentInTag,
         changelogHost: inputs.changelogHost,
-        versioning: 'customTest',
+        versioning: 'default',
         changelogSections: [
           { type: 'feat', section: 'Features' },
           { type: 'fix', section: 'Bug Fixes' },
