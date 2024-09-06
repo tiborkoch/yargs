@@ -81,7 +81,8 @@ export class DefaultVersioningStrategy {
             }
             return new MinorVersionUpdate();
         }
-        return new PatchVersionUpdate();
+        return new NoVersionUpdate();
+        // return new PatchVersionUpdate();
     }
     /**
      * Given the current version of an artifact and a list of commits,
@@ -93,5 +94,16 @@ export class DefaultVersioningStrategy {
      */
     bump(version, commits) {
         return this.determineReleaseType(version, commits).bump(version);
+    }
+}
+export class NoVersionUpdate {
+    /**
+     * Returns the new bumped version
+     *
+     * @param {Version} version The current version
+     * @returns {Version} The bumped version
+     */
+    bump(version) {
+        return new Version(version.major, version.minor, version.patch, version.preRelease, version.build);
     }
 }

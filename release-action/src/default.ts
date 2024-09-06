@@ -112,7 +112,8 @@ export class DefaultVersioningStrategy implements VersioningStrategy {
       return new MinorVersionUpdate();
     }
 
-    return new PatchVersionUpdate();
+    return new NoVersionUpdate();
+    // return new PatchVersionUpdate();
   }
 
   /**
@@ -125,5 +126,23 @@ export class DefaultVersioningStrategy implements VersioningStrategy {
    */
   bump(version: Version, commits: ConventionalCommit[]): Version {
     return this.determineReleaseType(version, commits).bump(version);
+  }
+}
+
+export class NoVersionUpdate implements VersionUpdater {
+  /**
+   * Returns the new bumped version
+   *
+   * @param {Version} version The current version
+   * @returns {Version} The bumped version
+   */
+  bump(version: Version): Version {
+    return new Version(
+      version.major,
+      version.minor,
+      version.patch,
+      version.preRelease,
+      version.build
+    );
   }
 }
